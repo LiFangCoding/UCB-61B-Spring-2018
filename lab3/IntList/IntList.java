@@ -11,11 +11,11 @@ public class IntList {
     /**
      * First element of list.
      */
-    public int first;
+    private int first;
     /**
      * Remaining elements of list.
      */
-    public IntList rest;
+    private IntList rest;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -81,7 +81,6 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
         if (A == null) {
             return B;
         }
@@ -100,7 +99,6 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
         if (A == null) {
             return B;
         }
@@ -108,6 +106,21 @@ public class IntList {
         return new IntList(A.first, catenate(A.rest, B));
     }
 
+    /**
+     * return the reverse of intlist
+     */
+    public static IntList reverse(IntList A) {
+        if (A.rest == null) {
+            return A;
+        }
+
+        IntList tail = A.rest;
+        IntList newHead = reverse(A.rest);
+        tail.rest = A;
+        A.rest = null;
+
+        return newHead;
+    }
 
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
@@ -163,6 +176,7 @@ public class IntList {
         }
         return true;
     }
+
 
     /**
      * If a cycle exists in the IntList, this method

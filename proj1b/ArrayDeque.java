@@ -1,4 +1,4 @@
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
     T[] items;
     // the items in the array
     int size;
@@ -7,35 +7,41 @@ public class ArrayDeque<T> {
     int nextFirst;
     int nextLast;
 
+    @Override
     public void addFirst(T item) {
         if (size == len) {
             resize(len * 2);
         }
-        if (nextFirst != nextLast) {
+
             items[nextFirst] = item;
             nextFirst = (nextFirst - 1 + len) % len;
             size++;
-        }
+
     }
 
+    @Override
     public void addLast(T item) {
         if (size == len) {
-            resize(len  * 2);
+            resize(len * 2);
         }
-        if (nextLast != nextFirst) {
+
             items[nextLast] = item;
             nextLast = (nextLast + 1) % len;
             size++;
-        }
+
     }
 
-    public boolean isEmpty(){
+    @Override
+    public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
+
+    @Override
     public void printDeque() {
         int iter = nextFirst;
         int n = size;
@@ -45,8 +51,10 @@ public class ArrayDeque<T> {
             n--;
         }
     }
+
+    @Override
     public T removeFirst() {
-        if (len >= 16 && ((double)size / len  <= 0.25)) {
+        if (len >= 16 && ((double) size / len <= 0.25)) {
             resize(len / 2);
         }
         if (size == 0) {
@@ -59,8 +67,10 @@ public class ArrayDeque<T> {
         size--;
         return res;
     }
+
+    @Override
     public T removeLast() {
-        if (len >= 16 && ((double)size / len  <= 0.25)) {
+        if (len >= 16 && ((double) size / len <= 0.25)) {
             resize(len / 2);
         }
         if (size == 0) {
@@ -75,6 +85,7 @@ public class ArrayDeque<T> {
         return res;
     }
 
+    @Override
     public T get(int index) {
         if (index >= size) {
             return null;
@@ -86,13 +97,14 @@ public class ArrayDeque<T> {
         return items[iter];
     }
 
-    public ArrayDeque(){
+    public ArrayDeque() {
         len = 8;
         items = (T[]) new Object[len];
         nextFirst = 0;
-        nextLast= 1;
+        nextLast = 1;
         size = 0;
     }
+
     // risize到一定的capacity或者说len.
     // capacity is the cap of newitems
     private void resize(int capacity) {

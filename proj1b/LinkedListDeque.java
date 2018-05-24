@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
     private class Node {
         public T val;
         public Node next;
@@ -7,7 +7,8 @@ public class LinkedListDeque<T> {
         public Node() {
 
         }
-        public Node(T t){
+
+        public Node(T t) {
             val = t;
         }
     }
@@ -15,6 +16,7 @@ public class LinkedListDeque<T> {
     private Node sen;
     private int size;
 
+    @Override
     //这个用一个双向sentinel指针的方法, 还是非常叼的.
     // invariant: sen的next是first, prev是last.
     public void addFirst(T item) {
@@ -27,6 +29,7 @@ public class LinkedListDeque<T> {
         size++;
     }
 
+    @Override
     public void addLast(T item) {
         Node oldLast = sen.prev;
         Node newLast = new Node(item);
@@ -37,13 +40,17 @@ public class LinkedListDeque<T> {
         size++;
     }
 
-    public boolean isEmpty(){
+    @Override
+    public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
+
+    @Override
     public void printDeque() {
         Node p = sen.next;
         while (size != 0) {
@@ -52,6 +59,8 @@ public class LinkedListDeque<T> {
             size--;
         }
     }
+
+    @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -62,6 +71,8 @@ public class LinkedListDeque<T> {
         size--;
         return first.val;
     }
+
+    @Override
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -74,6 +85,7 @@ public class LinkedListDeque<T> {
         return last.val;
     }
 
+    @Override
     public T get(int index) {
         if (index >= size) {
             return null;
@@ -94,7 +106,7 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public T getRecursive(int index){
+    public T getRecursive(int index) {
         if (index >= size) {
             return null;
         }
