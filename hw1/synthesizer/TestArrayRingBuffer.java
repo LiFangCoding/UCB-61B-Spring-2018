@@ -1,5 +1,8 @@
 package synthesizer;
 import org.junit.Test;
+
+import java.sql.Array;
+
 import static org.junit.Assert.*;
 
 /** Tests the ArrayRingBuffer class.
@@ -9,7 +12,19 @@ import static org.junit.Assert.*;
 public class TestArrayRingBuffer {
     @Test
     public void someTest() {
-        //ArrayRingBuffer arb = new ArrayRingBuffer(10);
+        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer(10);
+        arb.enqueue(1);
+        arb.enqueue(2);
+        arb.enqueue(3);
+//        arb.dequeue();
+//        arb.dequeue();
+        int res = 0;
+        arb.dequeue();
+        for (int i : arb) {
+            res = res * 10 + i;
+        }
+        assertEquals(23, res);
+
     }
 
     /** Calls tests for ArrayRingBuffer. */
